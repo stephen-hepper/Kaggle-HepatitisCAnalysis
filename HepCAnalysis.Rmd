@@ -41,7 +41,6 @@ set.seed(111)
 ```
 
 ```{r}
-
 data = data.frame(read.csv("HepatitisCdata.csv"))
 data_test = data
 data_test = data_test %>% drop_na()
@@ -49,7 +48,6 @@ data_test = data_test %>% drop_na()
 
 
 ```{r}
-
 data_test$Category = as.factor(data_test$Category)
 
 data_test$Sex = as.factor(data_test$Sex)
@@ -62,7 +60,6 @@ metabolites = (colnames(data_test))[5:14]
 
 fm = as.formula(paste0("Sex ~", 
           paste0(metabolites, collapse = "+")))
-
 
 ```
 
