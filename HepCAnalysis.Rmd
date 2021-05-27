@@ -71,8 +71,6 @@ fm = as.formula(paste0("Sex ~",
 fit.glm = glm(fm, 
                data= data_test,
                family=binomial(link="logit"))
-
-
 ```
 
 ```{r}
@@ -106,7 +104,6 @@ xtab3               # confusion matrix for threshold of 0.3
 ```
 
 ```{r}
-
 auc = roc(df.pred$actual,predicted_sex)
 p.roc = ggroc(auc, color = "darkred") 
 ```
@@ -120,7 +117,6 @@ p.roc = p.roc +
                           axis.text.y  = element_text( size=12),
                           axis.title.y=element_text(size=12))
 p.roc
-
 ```
 
 # K-Nearest Neighbors - Hepatitis Category Classification
@@ -135,14 +131,10 @@ knn_data = knn_data %>% drop_na()
 knn_data$Category = as.factor(knn_data$Category)
 #knn_data$Sex = as.factor(data_test$Sex)
 
-
 pred_vars  = (colnames(knn_data))[3:14]
-
-
 
 knn_data$Sex = revalue(knn_data$Sex, c("m"=0))
 knn_data$Sex = revalue(knn_data$Sex, c("f"=1))
-
 
 split_index = createDataPartition(data$Category, 
   p = .75, #the percentage of data that goes to training
@@ -193,10 +185,8 @@ knn_data_test$actual = factor(knn_data_test$Category)
 knn_data_test$prob = attributes(knn_res)$prob
 table(knn_data_test$actual, knn_data_test$predicted)
 
-
 sum(diag(table(knn_data_test$actual, knn_data_test$predicted)))/
   sum(table(knn_data_test$actual, knn_data_test$predicted))
-
 
 ```
 
@@ -212,7 +202,6 @@ knn_data_test$actual = factor(knn_data_test$Category)
 knn_data_test$prob = attributes(knn_res)$prob
 table(knn_data_test$actual, knn_data_test$predicted)
 
-
 sum(diag(table(knn_data_test$actual, knn_data_test$predicted)))/
   sum(table(knn_data_test$actual, knn_data_test$predicted))
 ```
@@ -227,7 +216,6 @@ reg_data$Age = as.double(reg_data$Age)
 
 reg_fm = as.formula(paste0("Age ~", 
           paste0(metabolites, collapse = "+")))
-
 
 ```
 
@@ -257,6 +245,7 @@ mean((ridge.fitted-y)^2)
 ```
 
 ## Lasso 
+
 ```{r}
 lasso.mod=glmnet(x,y,alpha=1,lambda=grid)
 
@@ -276,7 +265,6 @@ mean((lasso.fitted-y)^2)
 # PCA Analysis of Metabolites
 
 ```{r}
-
 pca_data = data_test[,metabolites]
 pca_data = na.omit(pca_data)
 
@@ -313,7 +301,6 @@ sig_var_names = rownames(sig_vars)
 ```
 
 ```{r}
-
 fviz_pca_var(res.pca, col.var = "contrib",
              gradient.cols =c("red","white","blue"),ggtheme =theme_minimal())
 
