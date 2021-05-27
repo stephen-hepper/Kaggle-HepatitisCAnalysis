@@ -1,4 +1,4 @@
-# Kaggle-HepatitisC
+# Kaggle-HepatitisCAnalysis
 
 Practice implementing machine learning methods on a Kaggle dataset
 
